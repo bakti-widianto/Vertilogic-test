@@ -13,7 +13,7 @@ module.exports = (db) => {
     })
   });
 
-
+  //POST NEW VENDOR
   router.post('/', function (req, res) {
     db.serialize(() => {
       let sql = (`INSERT INTO vendors(name, logo, created_at, updated_at) VALUES(?, ?, datetime('now'), datetime('now'))`)
@@ -34,6 +34,7 @@ module.exports = (db) => {
 
   })
 
+  //DELETE VENDOR
   router.get('/:id', function (req, res) {
     let sql = 'DELETE FROM vendors WHERE id = ?'
     db.run(sql, [req.params.id], (err) => {
@@ -48,6 +49,7 @@ module.exports = (db) => {
     })
   })
 
+  //EDIT VENDOR
   router.post('/:id', function (req, res) {
     let sql = `UPDATE vendors SET name = ?, logo = ?, updated_at = datetime('now') WHERE id = ?`
     let { name, logo } = req.body

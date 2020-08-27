@@ -13,7 +13,7 @@ module.exports = (db) => {
         })
     });
 
-
+    //POST NEW TAGS
     router.post('/', function (req, res) {
         db.serialize(() => {
             let sql = (`INSERT INTO tags(name, created_at, updated_at) VALUES(?, datetime('now'), datetime('now'))`)
@@ -34,6 +34,7 @@ module.exports = (db) => {
 
     })
 
+    //DELETE TAGS
     router.delete('/:id', function (req, res) {
         let sql = 'DELETE FROM tags WHERE id = ?'
         db.run(sql, [req.params.id], (err) => {
@@ -48,6 +49,7 @@ module.exports = (db) => {
         })
     })
 
+    //EDIT TAGS
     router.put('/:id', function (req, res) {
         let sql = `UPDATE tags SET name = ?, updated_at = datetime('now') WHERE id = ?`
         let { name } = req.body
@@ -64,7 +66,7 @@ module.exports = (db) => {
         })
     })
 
-    //GET ALL MENU BY ID RESTO
+    //GET ALL DISHES BY ID VENDOR
     router.get('/dishes/:vendorid', function (req, res) {
         let id = req.params.vendorid
         let sqlvendor = `SELECT * FROM vendors WHERE id = ?`
@@ -83,22 +85,7 @@ module.exports = (db) => {
                     dishes: data
                 })
             })
-
-
         })
-
-
-
-
-        // let sql = `SELECT tags.*, (vendors.id) as restoid, (vendors.name) as resto FROM taggables 
-        // LEFT JOIN tags on tags.id = taggables.tag_id 
-        // LEFT JOIN vendors on vendors.id = taggables.taggable_id 
-        // WHERE taggable_id = ?`
-
-        // db.all(sql, [restoid], (err, rows) => {
-        //   if (err) res.status(500).json(err)
-        //   res.json(rows)
-        // })
     })
 
     return router;

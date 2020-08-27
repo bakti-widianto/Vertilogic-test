@@ -65,27 +65,5 @@ module.exports = (db) => {
   })
 
 
-
-
-
-
-
-
-
-
-  // //GET ALL MENU BY ID RESTO
-  // router.get('/:restoid', function (req, res) {
-  //   let restoid = req.params.restoid
-  //   let sql = `SELECT tags.*, (vendors.id) as restoid, (vendors.name) as resto FROM taggables 
-  //   LEFT JOIN tags on tags.id = taggables.tag_id 
-  //   LEFT JOIN vendors on vendors.id = taggables.taggable_id 
-  //   WHERE taggable_id = ?`
-
-  //   db.all(sql, [restoid], (err, rows) => {
-  //     if (err) res.status(500).json(err)
-  //     res.json(rows)
-  //   })
-  // })
-
   return router;
 }

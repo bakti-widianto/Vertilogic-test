@@ -36,8 +36,8 @@ module.exports = (db) => {
 
   router.get('/:id', function (req, res) {
     let sql = 'DELETE FROM vendors WHERE id = ?'
-    db.run(sql, [req.params.id], (err)=>{
-      if(err) res.json({
+    db.run(sql, [req.params.id], (err) => {
+      if (err) res.json({
         error: true,
         message: err
       })
@@ -48,6 +48,21 @@ module.exports = (db) => {
     })
   })
 
+  router.post('/:id', function (req, res) {
+    let sql = `UPDATE vendors SET name = ?, logo = ?, updated_at = datetime('now') WHERE id = ?`
+    let { name, logo } = req.body
+
+    db.run(sql, [name, logo, req.params.id], (err) => {
+      if (err) res.json({
+        error: true,
+        message: err
+      })
+      res.json({
+        error: false,
+        message: 'UPDATE COMPLETE'
+      })
+    })
+  })
 
 
 

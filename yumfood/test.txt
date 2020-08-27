@@ -1,0 +1,16 @@
+select (vendors.id) as vendorid, (vendors.name) as vendorname, vendors.logo, taggables.taggable_id, 
+taggables.tag_id, (tags.id) as tagid, (tags.name) as tagsname from vendors 
+join taggables on vendors.id = taggables.taggable_id join tags on taggables.tag_id = tags.id;
+
+
+
+CREATE TABLE IF NOT EXISTS "migrations" ("id" integer not null primary key autoincrement, "migration" varchar not null, "batch" integer not null);
+CREATE TABLE sqlite_sequence(name,seq);
+CREATE TABLE IF NOT EXISTS "users" ("id" integer not null primary key autoincrement, "name" varchar not null, "email" varchar not null, "email_verified_at" datetime null, "password" varchar not null, "remember_token" varchar null, "created_at" datetime null, "updated_at" datetime null);
+CREATE UNIQUE INDEX "users_email_unique" on "users" ("email");
+CREATE TABLE IF NOT EXISTS "password_resets" ("email" varchar not null, "token" varchar not null, "created_at" datetime null);
+CREATE INDEX "password_resets_email_index" on "password_resets" ("email");
+CREATE TABLE IF NOT EXISTS "vendors" ("id" integer not null primary key autoincrement, "name" varchar not null, "logo" varchar not null default 'http://lorempixel.com/output/animals-q-g-640-480-7.jpg', "created_at" datetime null, "updated_at" datetime null);
+CREATE TABLE IF NOT EXISTS "tags" ("id" integer not null primary key autoincrement, "name" varchar not null, "created_at" datetime null, "updated_at" datetime null);
+CREATE UNIQUE INDEX "tags_name_unique" on "tags" ("name");
+CREATE TABLE IF NOT EXISTS "taggables" ("tag_id" integer not null, "taggable_id" integer not null, "taggable_type" varchar not null, "created_at" datetime null, "updated_at" datetime null);

@@ -12,7 +12,7 @@ const db = new sqlite3.Database(db_name, (err) => {
     console.log("Successful connention to the database 'database.sqlite'")
 })
 
-var restoRouter = require('./routes/resto')(db);
+var vendorRouter = require('./routes/vendors')(db);
 var usersRouter = require('./routes/users');
 
 var app = express();
@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/api/resto', restoRouter);
+app.use('/api/vendors', vendorRouter);
 app.use('/users', usersRouter);
 
 module.exports = app;

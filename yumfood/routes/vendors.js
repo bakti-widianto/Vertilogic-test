@@ -6,9 +6,32 @@ module.exports = (db) => {
 
   //GET ALL DATA VENDORS 
   router.get('/', function (req, res, next) {
+    // console.log(req.query.tag)
+    let serach = ''
+
+    if (req.query.tag) {
+      let result = []
+      req.query.tag.forEach((item) => {
+
+        if (item == "promo") {
+          result.push(`vendors.promo LIKE '%promo%'`)
+        }
+
+        if (item == "featured") {
+          result.push(`vendors.featured LIKE '%featured%'`)
+        }
+      })
+
+      if (result.length > 0) {
+        serach += ` WHERE ${result.join(" AND ")}`
+      }
+    }
+
+    console.log(serach)
+
     let data = [];
     const maxLength = 128;
-    let sql = `SELECT * FROM vendors`
+    let sql = `SELECT * FROM vendors ${serach}`
 
     db.all(sql, (err, rows) => {
       if (err) res.status(500).json(err)

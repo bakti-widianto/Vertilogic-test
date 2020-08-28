@@ -6,10 +6,22 @@ module.exports = (db) => {
 
   //GET ALL DATA VENDORS 
   router.get('/', function (req, res, next) {
+    let data = [];
+    const maxLength = 128;
     let sql = `SELECT * FROM vendors`
+
     db.all(sql, (err, rows) => {
       if (err) res.status(500).json(err)
-      res.json(rows)
+      //console.log(rows)
+      rows.map((item) => {
+        if (item.name.length <= maxLength) {
+          // console.log(item.name)
+          // console.log(item.name.length)
+          data.push(item)
+        }
+      })
+
+      res.json(data)
     })
   });
 

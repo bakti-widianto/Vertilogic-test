@@ -15,6 +15,7 @@ const db = new sqlite3.Database(db_name, (err) => {
 var vendorRouter = require('./routes/vendors')(db);
 var tagRouter = require('./routes/tags')(db);
 var usersRouter = require('./routes/users')(db);
+var orderRouter = require('./routes/orders')(db);
 
 var app = express();
 
@@ -27,5 +28,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/vendors', vendorRouter);
 app.use('/api/tags', tagRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/orders', orderRouter);
 
 module.exports = app;

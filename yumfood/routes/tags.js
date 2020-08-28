@@ -67,7 +67,7 @@ module.exports = (db) => {
     })
 
     //GET ALL DISHES BY ID VENDOR
-    router.get('/dishes/:vendorid', function (req, res) {
+    router.get('/:vendorid', function (req, res) {
         let id = req.params.vendorid
         let sqlvendor = `SELECT * FROM vendors WHERE id = ?`
 

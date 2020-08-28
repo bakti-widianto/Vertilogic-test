@@ -11,3 +11,17 @@ CREATE TABLE IF NOT EXISTS orders (
 
 INSERT INTO orders (tag_id, vendor_id, user_id, qty, note, created_at, updated_at) 
 VALUES (10, 10, 2, 2, 'chilli sauce', datetime('now'), datetime('now')); 
+
+
+
+
+=======ADD NEW COLUMN TO VENDORS =======
+ALTER TABLE vendors 
+ADD COLUMN promo text;
+
+ALTER TABLE vendors 
+ADD COLUMN featured text;
+
+
+
+
